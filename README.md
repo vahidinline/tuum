@@ -28,3 +28,10 @@ although third-party packages for countries with flag is exist, I prefer to use 
 #### Form Validation
 
 
+#### Setup
+To run this project, install it locally using npm:
+
+```
+$ cd tuum
+$ npm install
+$ npm start
