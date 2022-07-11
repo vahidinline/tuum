@@ -11,9 +11,14 @@ import {
   Button,
   Typography,
 } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+
 import { countries } from './data/countries';
+import { industries } from './data/industries';
 
 const FormInputs = () => {
+  const navigate = useNavigate();
+
   const [submit, setSubmit] = useState(true);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -41,204 +46,178 @@ const FormInputs = () => {
   useEffect(() => {
     submitForm();
   }, [firstName, email, company, industry, country, privacy]);
-  console.log(submit);
+  const submitbutton = () => {
+    navigate('/thankyou');
+  };
   return (
-    <form>
-      <Grid container spacing={3} px={{ xs: 0, sm: 1, md: 10 }}>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            id="firstName"
-            name="firstName"
-            label="First name"
-            fullWidth
-            autoComplete="given-name"
-            variant="standard"
-            onChange={(e) => {
-              setFirstName(e.target.value);
-            }}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            id="lastName"
-            name="lastName"
-            label="Last name"
-            fullWidth
-            autoComplete="family-name"
-            variant="standard"
-            onChange={(e) => {
-              setLastName(e.target.value);
-            }}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="email"
-            name="email"
-            label="Email"
-            type="email"
-            fullWidth
-            autoComplete="shipping address-line1"
-            variant="standard"
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            id="jobtitle"
-            name="jobTitle"
-            label="Job Title"
-            fullWidth
-            variant="standard"
-            onChange={(e) => {
-              setJobTitle(e.target.value);
-            }}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            id="CompanyName"
-            name="company"
-            label="Company Name"
-            fullWidth
-            autoComplete="Company Name"
-            variant="standard"
-            onChange={(e) => {
-              setCompany(e.target.value);
-            }}
-          />
-        </Grid>
-
-        <Grid item xs={12} sm={6}>
-          {/**/}
-          <FormControl variant="standard" fullWidth>
-            <InputLabel id="demo-simple-select-standard-label">
-              Industry
-            </InputLabel>
-            <Select
-              defaultValue=""
-              required
-              name="industry"
-              labelId="demo-simple-select-standard-label"
-              id="demo-simple-select-standard"
-              value={industry}
-              onChange={(e) => {
-                setIndustry(e.target.value);
-              }}>
-              <MenuItem value="Automative">Automative</MenuItem>
-              <MenuItem value="">Banking</MenuItem>
-              <MenuItem value="">Consulting</MenuItem>
-              <MenuItem value="">Finance</MenuItem>
-              <MenuItem value="">HealthCare</MenuItem>
-              <MenuItem value="">Media/PR</MenuItem>
-              <MenuItem value="">Retail</MenuItem>
-              <MenuItem value="">Technology</MenuItem>
-              <MenuItem value="">Telecommunucation</MenuItem>
-              <MenuItem value="">Other</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <FormControl variant="standard" fullWidth>
-            <InputLabel id="demo-simple-select-standard-label">
-              Country
-            </InputLabel>
-            <Select
-              name="country"
-              value={country}
-              onChange={(e) => {
-                setCountry(e.target.value);
-              }}>
-              {countries.map((country) => {
-                return (
-                  <MenuItem value={country.name}>
-                    {country.emoji} {country.name}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <FormControl variant="standard" fullWidth>
-            <InputLabel id="demo-simple-select-standard-label">
-              Operating Geography
-            </InputLabel>
-            <Select
-              onChange={(e) => {
-                setGeography(e.target.value);
-              }}
-              name="geoGraphy"
-              defaultValue=""
-              labelId="demo-simple-select-standard-label"
-              id="demo-simple-select-standard">
-              <MenuItem value="National">National</MenuItem>
-              <MenuItem value="Regional">Regional</MenuItem>
-              <MenuItem value="Global">Global</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12} sm={12}>
-          <InputLabel id="demo-simple-select-standard-label">
-            What would you like to talk about?
-          </InputLabel>
-          <FormControl variant="standard" fullWidth>
-            <TextField
-              name="textArea"
-              id="outlined-multiline-static"
-              multiline
-              rows={4}
-              onChange={(e) => {
-                setDesc(e.target.value);
-              }}
-            />
-          </FormControl>
-        </Grid>
-        <Grid item xs={12}>
-          <FormControlLabel
-            control={
-              <Checkbox
-                onChange={(e) => {
-                  setPrivacy(e.target.value);
-                }}
-                color="secondary"
-                name="saveAddress"
-                value="yes"
-              />
-            }
-            label={
-              <div>
-                <span>By submitting this form I accept </span>
-                <a href={'https://tuumplatform.com/privacy-policy'}>
-                  privacy policy and cookie policy.
-                </a>
-              </div>
-            }
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <FormControlLabel
-            control={
-              <Checkbox
-                color="secondary"
-                onChange={(e) => {
-                  setNewsLetter(e.target.value);
-                }}
-                name="newLetter"
-              />
-            }
-            label="I would like to receive your newsletter.
-            "
-          />
-        </Grid>
-        <Button disabled={submit} type="submit">
-          <Typography va>Submit form</Typography>
-        </Button>
+    <Grid container spacing={3} px={{ xs: 0, sm: 1, md: 10 }}>
+      <Grid item xs={12} sm={6}>
+        <TextField
+          name="firstName"
+          label="First name"
+          fullWidth
+          variant="standard"
+          onChange={(e) => {
+            setFirstName(e.target.value);
+          }}
+        />
       </Grid>
-    </form>
+      <Grid item xs={12} sm={6}>
+        <TextField
+          name="lastName"
+          label="Last name"
+          fullWidth
+          variant="standard"
+          onChange={(e) => {
+            setLastName(e.target.value);
+          }}
+        />
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <TextField
+          required
+          name="email"
+          label="Email"
+          fullWidth
+          variant="standard"
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+        />
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <TextField
+          name="jobTitle"
+          label="Job Title"
+          fullWidth
+          variant="standard"
+          onChange={(e) => {
+            setJobTitle(e.target.value);
+          }}
+        />
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <TextField
+          name="company"
+          label="Company Name"
+          fullWidth
+          variant="standard"
+          onChange={(e) => {
+            setCompany(e.target.value);
+          }}
+        />
+      </Grid>
+
+      <Grid item xs={12} sm={6}>
+        {/**/}
+        <FormControl variant="standard" fullWidth>
+          <InputLabel id="demo-simple-select-standard-label">
+            Industry
+          </InputLabel>
+          <Select
+            defaultValue=""
+            required
+            name="industry"
+            value={industry}
+            onChange={(e) => {
+              setIndustry(e.target.value);
+            }}>
+            {industries.map((industry) => {
+              return <MenuItem value={industry.name}>{industry.name}</MenuItem>;
+            })}
+          </Select>
+        </FormControl>
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <FormControl variant="standard" fullWidth>
+          <InputLabel id="demo-simple-select-standard-label">
+            Country
+          </InputLabel>
+          <Select
+            name="country"
+            value={country}
+            onChange={(e) => {
+              setCountry(e.target.value);
+            }}>
+            {countries.map((country) => {
+              return (
+                <MenuItem value={country.name}>
+                  {country.emoji} {country.name}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <FormControl variant="standard" fullWidth>
+          <InputLabel id="demo-simple-select-standard-label">
+            Operating Geography
+          </InputLabel>
+          <Select
+            onChange={(e) => {
+              setGeography(e.target.value);
+            }}
+            name="geoGraphy">
+            <MenuItem value="National">National</MenuItem>
+            <MenuItem value="Regional">Regional</MenuItem>
+            <MenuItem value="Global">Global</MenuItem>
+          </Select>
+        </FormControl>
+      </Grid>
+      <Grid item xs={12} sm={12}>
+        <InputLabel>What would you like to talk about?</InputLabel>
+        <FormControl variant="standard" fullWidth>
+          <TextField
+            name="textArea"
+            multiline
+            rows={4}
+            onChange={(e) => {
+              setDesc(e.target.value);
+            }}
+          />
+        </FormControl>
+      </Grid>
+      <Grid item xs={12}>
+        <FormControlLabel
+          control={
+            <Checkbox
+              onChange={(e) => {
+                setPrivacy(e.target.value);
+              }}
+              color="secondary"
+              name="privacy"
+            />
+          }
+          label={
+            <div>
+              <span>By submitting this form I accept </span>
+              <a href={'https://tuumplatform.com/privacy-policy'}>
+                privacy policy and cookie policy.
+              </a>
+            </div>
+          }
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <FormControlLabel
+          control={
+            <Checkbox
+              color="secondary"
+              onChange={(e) => {
+                setNewsLetter(e.target.value);
+              }}
+              name="newLetter"
+            />
+          }
+          label="I would like to receive your newsletter.
+            "
+        />
+      </Grid>
+      <Button disabled={submit} onClick={submitbutton} type="submit">
+        <Typography va>Submit form</Typography>
+      </Button>
+    </Grid>
   );
 };
 
